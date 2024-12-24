@@ -1,0 +1,183 @@
+:root {
+    --loader-scale: 0.6;
+    --loader-width: 15em;
+    --loader-height: 20em;
+    --loading-animation-time: 0.8s;
+  }
+  
+ html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: #ffffff;
+    background-image: url("images/overlay.png"), -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+    background-image: url("images/overlay.png"), -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+    background-image: url("images/overlay.png"), -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+    background-image: url("images/overlay.png"), linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("../../images/bg.jpg");
+    background-repeat: repeat,			no-repeat,			no-repeat;
+    background-size: 100px 100px, cover,				cover;
+    background-position: top left,		center center,		bottom center;
+    background-attachment: fixed,			fixed,				fixed;
+}
+
+    body:after {
+        content: '';
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: inherit;
+        opacity: 0;
+        z-index: 1;
+        background-color: #ffffff;
+        background-image: url("images/overlay.png"), -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+        background-image: url("images/overlay.png"), -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+        background-image: url("images/overlay.png"), -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+        background-image: url("images/overlay.png"), linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+        background-repeat: repeat,			no-repeat;
+        background-size: 100px 100px, cover;
+        background-position: top left,		center center;
+        -moz-transition: opacity 1.75s ease-out;
+        -webkit-transition: opacity 1.75s ease-out;
+        -ms-transition: opacity 1.75s ease-out;
+        transition: opacity 1.75s ease-out;
+    }
+
+    body.is-preload:after {
+        opacity: 1;
+    }
+
+
+
+  .is-preload .loader{
+      opacity: 1;
+      z-index: 999;
+  }
+  
+  .loader {
+    width: 100%;
+    min-width: var(--loader-width);
+  
+    transition: all 0.5s ease-in-out;
+  
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  
+    position: absolute;
+    top: calc(50% - 10em);
+    transform: scale(var(--loader-scale), var(--loader-scale));
+    
+    z-index: -999;
+    opacity: 0;
+  }
+  
+  .loader h1 {
+    font-size: 5em;
+    margin: 25px ;
+    animation: loading var(--loading-animation-time) infinite
+      calc(var(--loading-animation-time) / 20) ease-in-out;
+  
+    transition: all 1s ease-in-out;
+  }
+  
+  .loader p {
+    font-size: 4em;
+    margin: 0;
+    color: #fff;
+  
+    animation: loading var(--loading-animation-time) infinite ease-in-out;
+    transition: all 0.4s ease-out;
+    transition-delay: 0.4s;
+  }
+  
+  .loader .container {
+    width: var(--loader-width);
+    line-height: 1.2;
+  }
+  
+  .loader .container::after {
+    content: "";
+    display: block;
+    width: var(--loader-width);
+    height: var(--loader-height);
+    border: 2px solid #fff;
+    border-radius: 0 0 15px 15px;
+    border-top: 3px dotted #fff;
+    position: absolute;
+    top: -1em;
+  
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 0%, transparent 35%),
+      linear-gradient(-90deg, rgba(185, 185, 185, 0.18) 0%, transparent 35%),
+      linear-gradient(0deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+  }
+  
+  .loader .container:hover h1 {
+    padding-top: 1em;
+  }
+  
+  .loader .container:hover p {
+    opacity: 0;
+    transition-delay: 0s;
+  }
+  
+  .loader .container::after,
+  .loader .container::before {
+    animation: loading var(--loading-animation-time)
+      calc(var(--loading-animation-time) / 12) infinite ease-in-out;
+  }
+  
+  @keyframes loading {
+    0%,
+    100% {
+      transform: translate(-10px, 0) rotatez(-1.5deg);
+    }
+    50% {
+      transform: translate(10px, 0) rotatez(1.5deg);
+    }
+  }
+
+
+.loader__progress{
+    border-radius: 0 0 20px 20px;
+    border-top: none;
+    position: relative;
+    background-color: skyblue;
+    overflow: hidden;
+    animation: loading var(--loading-animation-time)
+    calc(var(--loading-animation-time) / 12) infinite ease-in-out;
+}
+.loader__progress::before,
+.loader__progress::after {
+    content: '';
+    position: absolute;
+    width: 350px;
+    height: 280px;
+    border-radius: 55% 45%;
+    bottom: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    animation: rotate 2s linear infinite;
+}
+.loader__progress::after {
+    left: 41%;
+    bottom: 45%;
+    border-radius: 45% 50%;
+    opacity: 0.3;
+}
+
+@keyframes rotate {
+    0% {
+        transform: translate(-50%) rotateZ(0deg);
+    }
+    100% {
+        transform: translate(-50%) rotateZ(360deg);
+    }
+}
