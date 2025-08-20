@@ -118,9 +118,6 @@ body {
       linear-gradient(0deg, rgba(255,255,255,0.1) 0%, transparent 50%);
   }
   
-  .loader .container:hover h1 {
-    padding-top: 1em;
-  }
   
   .loader .container:hover p {
     opacity: 0;
